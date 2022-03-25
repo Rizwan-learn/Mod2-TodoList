@@ -4,29 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <title>To Do List</title>
-    <script src="https://kit.fontawesome.com/f6777e9957.js"></script>
+    <title>To Do list</title>
 </head>
 
 <body>
-    <ul class="toDo">
-        <li class="table">
-            <h4>To Do List</h4>
-        </li>
-        <li class="table">
-            <input type="text" id="add" placeholder="Add tasks">
-        </li>
-        <li class="table">
-            <ul id="tasks">
-
+    <main>
+        <section class="container">
+            <div class="ctn-head">
+                <h5 class="head-title">Today's To Do</h5>
+                <div class="ctn-icon"><i class="fa-solid fa-arrows-rotate"></i></div>
+            </div>
+            <div class="line"></div>
+            <div class="ctn-input">
+                <input class="input-txt" type="text" placeholder="Add to your list...">
+                <div class="ctn-icon"><i class="fa-solid fa-arrow-turn-down"></i></div>
+            </div>
+            <div class="line"></div>
+            <ul id="ctn-task-list" class="ctn-task-list">
             </ul>
-        </li>
-        <li class="table btn">
-            <button type="button">Clear completed tasks</button>
-        </li>
-    </ul>
+            <div class="ctn-txt-bottom"><h5 class="txt-bottom">Clear all completed</h5></div>
+        </section>
+    </main>
 </body>
 
 </html>
