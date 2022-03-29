@@ -1,12 +1,13 @@
 {
   "name": "mod2-todolist",
   "version": "1.0.0",
-  "description": "",
+  "description": "![](https://img.shields.io/badge/Microverse-blueviolet)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack serve --open",
-    "build": "webpack"
+    "build": "webpack",
+    "deploy": "gh-pages -d dist"
   },
   "repository": {
     "type": "git",
@@ -38,6 +39,7 @@
     "webpack-dev-server": "^4.7.4"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^6.1.1"
+    "@fortawesome/fontawesome-svg-core": "^6.1.1",
+    "gh-pages": "^3.2.3"
   }
 }
