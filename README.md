@@ -13,7 +13,7 @@
 
 ## Live Demo (if available)
 
-[Live DEMO](https://rizwan-learn.github.io/dist/index.html)
+[Live DEMO](https://rizwan-learn.github.io/Mod2-TodoList/dist/index.html)
 
 
 ## Getting Started
