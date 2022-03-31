@@ -1,9 +1,9 @@
-import { addTask} from '../__mock__/crud.js';
+import addTask from "./src__mock__crud.js";
 
-describe('crud', () => {
-  test('add task', () => {
-    expect(addTask(1, false, 'love life')).toEqual([
-      { index: 1, completed: false, description: 'love life' },
+describe("crud", () => {
+  test("add task", () => {
+    expect(addTask(1, false, "this is a discription")).toEqual([
+      { index: 1, completed: false, description: "this is a discription" },
     ]);
   });
 });
