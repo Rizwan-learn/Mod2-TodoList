@@ -1,30 +1,27 @@
-import { addTask, removeTask } from "../__mock__/crud.js";
-describe("crud", () => {
-  test("add task", () => {
-    expect(addTask(1, false, "task1")).toEqual([
-      { index: 1, completed: false, description: "task1" },
+import { addTask, removeTask } from '../__mock__/crud.js';
+
+describe('crud', () => {
+  test('add task', () => {
+    expect(addTask(1, false, 'task1')).toEqual([
+      { index: 1, completed: false, description: 'task1' },
     ]);
   });
-  
-  test("remove task", () => {
-    addTask(1, false, 'remove task1');
-    addTask(2, false, 'remove task2');
-    addTask(3, false, 'remove task3');
 
+  test('remove task', () => {
+    addTask(1, false, 'task1');
+    addTask(2, false, 'task2');
+    addTask(3, false, 'task3');
     expect(removeTask(1)).toEqual([
       {
-        
         completed: false,
-        description: 'remove task1',
-        index: 1
+        description: 'task2',
+        index: 1,
       },
       {
         completed: false,
-        description: 'remove task2',
-        index: 2
-      }
-
+        description: 'task3',
+        index: 2,
+      },
     ]);
-
   });
 });

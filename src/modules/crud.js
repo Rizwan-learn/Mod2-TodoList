@@ -1,7 +1,6 @@
 import { loadStorage, updateStorage } from './storage.js';
 import Task from './task.js';
 
-
 export const addTask = (index, completed, description) => {
   const task = new Task(index, completed, description);
   const tasks = loadStorage();
