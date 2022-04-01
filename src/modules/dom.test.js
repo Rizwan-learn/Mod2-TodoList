@@ -1,4 +1,5 @@
-import crud from "./crud.test";
+import crud from './crud.test';
+import Task from './task.js';
 
 class task {
   constructor() {
@@ -6,10 +7,10 @@ class task {
   }
 
   initialize() {
-    const stored = localStorage.getItem("taskData");
+    const stored = localStorage.getItem('taskData');
     if (stored) {
       this.tasks = JSON.parse(stored).map(
-        (task, index) => new task(task.description, task.completed, index + 1)
+        (task, index) => new Task(task.description, task.completed, index + 1),
       );
       this.setHtml();
     }
@@ -26,61 +27,61 @@ class task {
     const newTasks = [];
     tasks.forEach((t, index) => {
       newTasks.push(
-        new Task(t.description, t.completed, index + 1, t.editable)
+        new Task(t.description, t.completed, index + 1, t.editable),
       );
     });
     this.tasks = newTasks;
     localStorage.setItem(
-      "taskData",
-      JSON.stringify(this.tasks.map((t, index) => ({ ...t, index })))
+      'taskData',
+      JSON.stringify(this.tasks.map((t, index) => ({ ...t, index }))),
     );
     this.setHtml();
     this.setup();
   }
 
   hamburger() {
-    const remove = document.querySelectorAll(".remove");
+    const remove = document.querySelectorAll('.remove');
     remove.forEach((rmBtn) => {
       const hamb = document.getElementById(
-        rmBtn.id.replace("remove", "myLinks")
+        rmBtn.id.replace('remove', 'myLinks'),
       );
-      rmBtn.addEventListener("click", () => {
-        rmBtn.style.display = "none";
-        hamb.style.display = "flex";
+      rmBtn.addEventListener('click', () => {
+        rmBtn.style.display = 'none';
+        hamb.style.display = 'flex';
       });
     });
     return this.hamburger;
   }
 
   removeItem(index) {
-    this.tasks = JSON.parse(localStorage.getItem("taskData"));
+    this.tasks = JSON.parse(localStorage.getItem('taskData'));
     document.body.innerHTML = '<ul id="tasks"></ul>';
-    const container = document.getElementById("tasks");
+    const container = document.getElementById('tasks');
     const newTasks = this.tasks.filter((t) => t.index !== index + 1);
-    localStorage.setItem("taskData", JSON.stringify(newTasks));
-    const storage = JSON.parse(localStorage.getItem("taskData"));
+    localStorage.setItem('taskData', JSON.stringify(newTasks));
+    const storage = JSON.parse(localStorage.getItem('taskData'));
     storage.forEach((task) => {
       container.innerHTML += `
         <li class="task">
         <div class="description">
         <input type="checkbox" class="check"  id="checkbox-${task.index - 1}" ${
-        task.completed ? "checked" : ""
-      }/>
-        ${!task.editable ? `<p class="text">${task.description}</p>` : ""}
+  task.completed ? 'checked' : ''
+}/>
+        ${!task.editable ? `<p class="text">${task.description}</p>` : ''}
         ${
-          task.editable
-            ? `<input value='${task.description}' id="input-${
-                task.index - 1
-              }"/>`
-            : ""
-        }</div>
+  task.editable
+    ? `<input value='${task.description}' id="input-${
+      task.index - 1
+    }"/>`
+    : ''
+}</div>
        <div id="myLinks-${task.index - 1}" style="display:none" class="list" >
        <a href="#" class='del' id="del-${task.index - 1}">Delete</a>
        <a href="#" class='edit'>Edit</a>
        </div>
        <button class="remove" id="remove-${
-         task.index - 1
-       }"><i class="fa-solid fa-ellipsis-vertical ellips"></i></button>
+  task.index - 1
+}"><i class="fa-solid fa-ellipsis-vertical ellips"></i></button>
        </li>`;
     });
   }
@@ -91,7 +92,7 @@ class task {
   }
 
   editTask(index, description) {
-    this.tasks = JSON.parse(localStorage.getItem("taskData"));
+    this.tasks = JSON.parse(localStorage.getItem('taskData'));
     this.tasks.map((task) => {
       if (task.index === index) {
         task.description = description;
@@ -99,53 +100,53 @@ class task {
       }
       return task;
     });
-    localStorage.setItem("taskData", JSON.stringify(this.tasks));
+    localStorage.setItem('taskData', JSON.stringify(this.tasks));
     document.body.innerHTML = '<ul id="tasks"></ul>';
-    const container = document.getElementById("tasks");
+    const container = document.getElementById('tasks');
     this.tasks.forEach((task) => {
       container.innerHTML += `<li class="task">
         <div class="description">
         <input type="checkbox" class="check"  id="checkbox-${task.index - 1}" ${
-        task.completed ? "checked" : ""
-      }/>
-        ${!task.editable ? `<p class="text">${task.description}</p>` : ""}
+  task.completed ? 'checked' : ''
+}/>
+        ${!task.editable ? `<p class="text">${task.description}</p>` : ''}
         ${
-          task.editable
-            ? `<input value='${task.description}' id="input-${
-                task.index - 1
-              }"/>`
-            : ""
-        }</div>
+  task.editable
+    ? `<input value='${task.description}' id="input-${
+      task.index - 1
+    }"/>`
+    : ''
+}</div>
        <div id="myLinks-${task.index - 1}" style="display:none" class="list" >
        <a href="#" class='del' id="del-${task.index - 1}">Delete</a>
        <a href="#" class='edit'>Edit</a>
        </div>
        <button class="remove" id="remove-${
-         task.index - 1
-       }"><i class="fa-solid fa-ellipsis-vertical ellips"></i></button>
+  task.index - 1
+}"><i class="fa-solid fa-ellipsis-vertical ellips"></i></button>
        </li>`;
     });
   }
 
   setupRemove() {
     this.hamburger();
-    const del = document.querySelectorAll(".del");
+    const del = document.querySelectorAll('.del');
     del.forEach((button) => {
       const removeFunc = () => {
-        const index = parseInt(button.id.replace("del-", ""), 10);
+        const index = parseInt(button.id.replace('del-', ''), 10);
         this.removeTask(index);
         this.assignTasks();
       };
       button.onclick = removeFunc;
     });
 
-    const edit = document.querySelectorAll(".edit");
+    const edit = document.querySelectorAll('.edit');
     edit.forEach((button, index) => {
-      button.addEventListener("click", () => {
+      button.addEventListener('click', () => {
         this.tasks[index].editable = true;
         this.assignTasks();
         const input = document.getElementById(`input-${index}`);
-        input.addEventListener("change", (e) => {
+        input.addEventListener('change', (e) => {
           e.preventDefault();
           this.editTask(index, e.target.value);
           this.assignTasks();
@@ -155,11 +156,11 @@ class task {
   }
 
   setupComplete() {
-    const checkboxList = document.querySelectorAll(".check");
+    const checkboxList = document.querySelectorAll('.check');
     checkboxList.forEach((checkbox) => {
-      checkbox.addEventListener("click", () => {
+      checkbox.addEventListener('click', () => {
         this.tasks[
-          parseInt(checkbox.id.replace("checkbox-", ""), 10)
+          parseInt(checkbox.id.replace('checkbox-', ''), 10)
         ].completed = checkbox.checked;
         this.assignTasks();
       });
@@ -169,26 +170,26 @@ class task {
   addItem(description) {
     const task = new Task(description, false, this.tasks.length + 1);
     this.tasks.push(task);
-    localStorage.setItem("taskData", JSON.stringify(this.tasks));
-    const container = document.getElementById("tasks");
+    localStorage.setItem('taskData', JSON.stringify(this.tasks));
+    const container = document.getElementById('tasks');
     container.innerHTML += `<li class="task">
     <div class="description">
     <input type="checkbox" class="check"  id="checkbox-${task.index - 1}" ${
-      task.completed ? "checked" : ""
-    }/>
-    ${!task.editable ? `<p class="text">${task.description}</p>` : ""}
+  task.completed ? 'checked' : ''
+}/>
+    ${!task.editable ? `<p class="text">${task.description}</p>` : ''}
     ${
-      task.editable
-        ? `<input value='${task.description}' id="input-${task.index - 1}"/>`
-        : ""
-    }</div>
+  task.editable
+    ? `<input value='${task.description}' id="input-${task.index - 1}"/>`
+    : ''
+}</div>
    <div id="myLinks-${task.index - 1}" style="display:none" class="list" >
    <a href="#" class='del' id="del-${task.index - 1}">Delete</a>
    <a href="#" class='edit'>Edit</a>
    </div>
    <button class="remove" id="remove-${
-     task.index - 1
-   }"><i class="fa-solid fa-ellipsis-vertical ellips"></i></button>
+  task.index - 1
+}"><i class="fa-solid fa-ellipsis-vertical ellips"></i></button>
    </li>`;
   }
 
@@ -204,7 +205,7 @@ class task {
   }
 
   getBookList() {
-    let containerHtml = "";
+    let containerHtml = '';
     this.tasks.forEach((task) => {
       containerHtml += task.getHtml();
     });
@@ -212,54 +213,54 @@ class task {
   }
 
   setHtml() {
-    const container = document.getElementById("tasks");
+    const container = document.getElementById('tasks');
     container.innerHTML = this.getBookList();
     this.setupRemove();
   }
 
   clearAllCompleted(index) {
-    this.tasks = JSON.parse(localStorage.getItem("taskData"));
+    this.tasks = JSON.parse(localStorage.getItem('taskData'));
     this.tasks.map((task) => {
       if (task.index === index) task.completed = !task.completed;
       return task;
     });
     const newTasks = this.tasks.filter((task) => task.completed === false);
-    localStorage.setItem("taskData", JSON.stringify(newTasks));
+    localStorage.setItem('taskData', JSON.stringify(newTasks));
     document.body.innerHTML = '<ul id="tasks"></ul>';
-    const container = document.getElementById("tasks");
+    const container = document.getElementById('tasks');
     newTasks.forEach((task) => {
       container.innerHTML += `<li class="task">
         <div class="description">
         <input type="checkbox" class="check"  id="checkbox-${task.index - 1}" ${
-        task.completed ? "checked" : ""
-      }/>
-        ${!task.editable ? `<p class="text">${task.description}</p>` : ""}
+  task.completed ? 'checked' : ''
+}/>
+        ${!task.editable ? `<p class="text">${task.description}</p>` : ''}
         ${
-          task.editable
-            ? `<input value='${task.description}' id="input-${
-                task.index - 1
-              }"/>`
-            : ""
-        }</div>
+  task.editable
+    ? `<input value='${task.description}' id="input-${
+      task.index - 1
+    }"/>`
+    : ''
+}</div>
        <div id="myLinks-${task.index - 1}" style="display:none" class="list" >
        <a href="#" class='del' id="del-${task.index - 1}">Delete</a>
        <a href="#" class='edit'>Edit</a>
        </div>
        <button class="remove" id="remove-${
-         task.index - 1
-       }"><i class="fa-solid fa-ellipsis-vertical ellips"></i></button>
+  task.index - 1
+}"><i class="fa-solid fa-ellipsis-vertical ellips"></i></button>
        </li>`;
     });
   }
 
   setupClearAll() {
-    const clear = document.getElementById("clear");
+    const clear = document.getElementById('clear');
     if (clear) {
-      clear.addEventListener("click", () => {
+      clear.addEventListener('click', () => {
         this.assignTasks(this.tasks.filter((task) => !task.completed));
       });
     }
   }
 }
 
-export default crud;
+export default { crud, task };
